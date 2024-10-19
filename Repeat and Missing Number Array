@@ -1,0 +1,23 @@
+public class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int n = nums.length;
+        long sumN = n * (n + 1) / 2;
+        long sumNSq = n * (n + 1) * (2 * n + 1) / 6;
+
+        long actualSum = 0;
+        long actualSumSquares = 0;
+
+        for (int num : nums) {
+            actualSum += num;
+            actualSumSquares += (long) num * num;
+        }
+
+        long D1 = sumN - actualSum;
+        long D2 = sumNSq - actualSumSquares;
+
+        long B = (D1 + D2 / D1) / 2;
+        long A = B - D1;
+
+        return new int[] {(int) A, (int) B};
+    }
+}
